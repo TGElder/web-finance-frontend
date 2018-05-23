@@ -1,0 +1,12 @@
+{
+    "mockDirectory": "mocks/backend/mocks",
+    "quiet": "false",
+    "port": "8080",
+    "corsCredentials": "true",
+    "webServices": {
+        "accounts": {
+            "mockFile": "accounts.json",
+            "verbs": ["get"]
+        }
+    }
+}
