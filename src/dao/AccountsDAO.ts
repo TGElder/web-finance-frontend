@@ -1,15 +1,14 @@
-export class AccountsDAO {
+import * as httpm from 'typed-rest-client/HttpClient';
+let httpc: httpm.HttpClient = new httpm.HttpClient('vsts-node-api');
 
-    getAccounts(callback): any {
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("GET", "http://localhost:8080/accounts", true);
-        xhttp.setRequestHeader("Content-type", "application/json");
-        xhttp.send();
-        xhttp.onreadystatechange = function() {
-            if(xhttp.readyState === 4 && xhttp.status === 200) {
-                callback(xhttp.responseText);
-            }
-        }
+export async function getAccounts(): Promise<JSON> {
+    try {
+        let res: httpm.HttpClientResponse = await httpc.get('http://localhost:8080/accounts');
+        let body = await res.readBody();
+        return JSON.parse(body);
+    }
+    catch(err) {
+        console.error('Failed: ' + err.message);
     }
 
 }

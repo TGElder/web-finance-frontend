@@ -1,6 +1,13 @@
-import * as AccountsDAO from "./dao/AccountsDAO"
+import {getAccounts} from "./dao/AccountsDAO"
 
-var accountsDao: AccountsDAO.AccountsDAO = new AccountsDAO.AccountsDAO();
-accountsDao.getAccounts(function(responseText: string) {
-    document.body.innerHTML = JSON.stringify(JSON.parse(responseText));
-});
+async function run(): Promise<void> {
+    try {
+        let json = await getAccounts();
+        document.body.innerHTML = JSON.stringify(json);
+    }
+    catch(err) {
+        console.error(err);
+    }
+}
+
+run
