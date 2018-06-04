@@ -2,7 +2,7 @@
     "name": "web-finance-frontend",
     "version": "0.0.1",
     "scripts": {
-        "compile-ts": "tsc src/App.ts",
+        "compile-ts": "tsc -p src/tsconfig.json",
         "mock-backend-server": "gulp mock-backend-server",
         "mock-frontend-server": "http-server src -p 3030",
         "test": "mocha -r ts-node/register src/**/*.spec.ts",

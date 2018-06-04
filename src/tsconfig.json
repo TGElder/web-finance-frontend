@@ -3,7 +3,8 @@
       "target": "ES6",
       "module": "commonjs",
       "moduleResolution": "node", 
-      "typeRoots": [ "node_modules/@types" ]
+      "typeRoots": [ "node_modules/@types" ],
+      "lib": ["es2015", "dom"]
   },
   "files": [
       "App.ts"
