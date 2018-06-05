@@ -3,13 +3,16 @@
     "version": "0.0.1",
     "scripts": {
         "compile-ts": "tsc -p src/tsconfig.json",
+        "browserify": "browserify src/App.js > src/bundle.js",
         "mock-backend-server": "gulp mock-backend-server",
         "mock-frontend-server": "http-server src -p 3030",
         "test": "mocha -r ts-node/register src/**/*.spec.ts",
-        "build-hexagon": "gulp build-hexagon"
+        "build-hexagon": "gulp build-hexagon",
+        "go": "npm run compile-ts && npm run browserify && npm run mock-frontend-server"
     },
     "author": "tgelder@gmail.com",
     "devDependencies": {
+        "browserify": "16.2.2",
         "chai": "4.1.2",
         "hexagon-js": "1.15.0",
         "gulp": "3.9.1",
