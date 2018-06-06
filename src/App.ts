@@ -1,32 +1,29 @@
 import {getAccounts} from "./dao/AccountsDAO";
-const hx = require("./resources/hexagon/hexagon.js");
+import {WebFinanceAccount} from "./model/WebFinanceAccount";
+declare const hx: any;
 
 async function run(): Promise<void> {
     try {
-        let json = await getAccounts();
+        let json: any = await getAccounts();
+
+        let tableRows = [];
+        for (let entity of json) {
+            console.log(entity);
+            let tableRow = {id: entity["id"], cells: {account: entity["name"]}};
+            console.log(tableRow);
+            tableRows.push(tableRow);
+        }
+
+        let tableContents = {
+            headers: [
+                {name: 'Account', id: 'account'}
+            ],
+            rows: tableRows
+        };
+                    
         //document.body.innerHTML = JSON.stringify(json);
-        var table = new hx.DataTable('#accounts');
-        table.feed(hx.dataTable.objectFeed({
-        headers: [
-            {name: 'Name', id: 'name'},
-            {name: 'Age', id: 'age'},
-            {name: 'Profession', id: 'profession'}
-        ],
-        rows: [
-            {
-            id: 0, // hidden details can go here (not in the cells object)
-            cells: {'name': 'Bob', 'age': 25, 'profession': 'Developer'}
-            },
-            {
-            id: 1,
-            cells: {'name': 'Jan', 'age': 41, 'profession': 'Artist'}
-            },
-            {
-            id: 2,
-            cells: {'name': 'Dan', 'age': 41, 'profession': 'Builder'}
-            }
-        ]
-        }));
+        let table = new hx.DataTable('#accounts');
+        table.feed(hx.dataTable.objectFeed(tableContents));
     }
     catch(err) {
         console.error(err);
