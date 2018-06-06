@@ -4,13 +4,11 @@ declare const hx: any;
 
 async function run(): Promise<void> {
     try {
-        let json: any = await getAccounts();
+        let accounts: WebFinanceAccount[] = await getAccounts();
 
         let tableRows = [];
-        for (let entity of json) {
-            console.log(entity);
-            let tableRow = {id: entity["id"], cells: {account: entity["name"]}};
-            console.log(tableRow);
+        for (let account of accounts) {
+            let tableRow = {id: account.getId(), cells: {account: account.getName()}};
             tableRows.push(tableRow);
         }
 
@@ -21,7 +19,6 @@ async function run(): Promise<void> {
             rows: tableRows
         };
                     
-        //document.body.innerHTML = JSON.stringify(json);
         let table = new hx.DataTable('#accounts');
         table.feed(hx.dataTable.objectFeed(tableContents));
     }

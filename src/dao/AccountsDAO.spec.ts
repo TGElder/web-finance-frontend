@@ -3,8 +3,8 @@ import 'mocha';
 import { getAccounts } from './AccountsDAO';
 
 it('should get the list of accounts', (done) => {
-    getAccounts().then( (json) => {
-        expect(json).to.deep.equal([
+    getAccounts().then( (accounts) => {
+        expect(accounts).to.deep.equal([
             {
                 "id": 1,
                 "name": "Savings"
