@@ -6,7 +6,7 @@
     "webServices": {
         "accounts": {
             "mockFile": "accounts.json",
-            "verbs": ["get"]
+            "verbs": ["get", "post"]
         }
     }
 }

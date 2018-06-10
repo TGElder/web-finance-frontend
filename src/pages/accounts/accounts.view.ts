@@ -1,11 +1,14 @@
-import {getAccounts} from "./../../dao/AccountsDAO";
+import {getAccounts, addAccount} from "./../../dao/AccountsDAO";
 import {WebFinanceAccount} from "./../../model/WebFinanceAccount";
 declare const hx: any;
 
 export class AccountsView{
 
+    table: any;
+
     public async init(): Promise<void> {
         try {
+            this.table = new hx.DataTable('#table');
             new hx.Form('#form')
                 .addText('Name', { required: true })
                 .addSubmit('Submit', 'fa fa-check')
@@ -32,23 +35,22 @@ export class AccountsView{
                     {name: 'Account', id: 'account'}
                 ],
                 rows: tableRows
-            };
+            }
                         
-            let table = new hx.DataTable('#table');
-            table.feed(hx.dataTable.objectFeed(tableContents));
+            this.table.feed(hx.dataTable.objectFeed(tableContents));
         }
         catch(err) {
-            hx.notify.error(err);
+            console.error(err);
         }
     }
 
-    private async saveAccount(data): Promise<void> {
+    private async saveAccount(data: JSON): Promise<void> {
         try {
-            console.log(data["Name"]);
-            hx.notify.info(data["Name"]);
+            await addAccount(data["Name"]);
+            await this.showAccounts();
         }
         catch (err) {
-            hx.notify.error(err);
+            console.error(err);
         }
     }
 

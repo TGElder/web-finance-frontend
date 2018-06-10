@@ -1,16 +1,28 @@
-import * as httpm from 'typed-rest-client/HttpClient';
+import * as rm from "../../node_modules/typed-rest-client/RestClient"
 import { WebFinanceAccount } from '../model/WebFinanceAccount';
-let httpc: httpm.HttpClient = new httpm.HttpClient('vsts-node-api');
+let restc: rm.RestClient = new rm.RestClient('frontend', "http://localhost:8080/accounts/");
 
 export async function getAccounts(): Promise<WebFinanceAccount[]> {
     try {
-        let res: httpm.HttpClientResponse = await httpc.get('http://localhost:8080/accounts');
-        let body: string = await res.readBody();
+        let restRes: rm.IRestResponse<JSON[]> = await restc.get<JSON[]>('');
         let out: WebFinanceAccount[] = [];
-        for (let entity of JSON.parse(body)) {
+        for (let entity of restRes.result) {
             out.push(new WebFinanceAccount(entity));
         }
         return out;
+    }
+    catch(err) {
+        console.error('Failed: ' + err.message);
+    }
+
+}
+
+export async function addAccount(account: string): Promise<void> {
+    try {
+        let data: any = {"name": account};
+        let hres: rm.IRestResponse<JSON> = await restc.create<any>('', data)
+        console.log(hres);
+        return;
     }
     catch(err) {
         console.error('Failed: ' + err.message);
