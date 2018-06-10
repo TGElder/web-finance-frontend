@@ -7,10 +7,9 @@ export class AccountsView{
     public async init(): Promise<void> {
         try {
             new hx.Form('#form')
-                .addText('Name', { required: true });
-            hx.select('#button').on('click', function(){
-                hx.notify.info('Button clicked');
-                });                
+                .addText('Name', { required: true })
+                .addSubmit('Submit', 'fa fa-check')
+                .on('submit', (data) => {this.saveAccount(data)})
             this.showAccounts();
         }
         catch(err) {
@@ -39,7 +38,17 @@ export class AccountsView{
             table.feed(hx.dataTable.objectFeed(tableContents));
         }
         catch(err) {
-            console.error(err);
+            hx.notify.error(err);
+        }
+    }
+
+    private async saveAccount(data): Promise<void> {
+        try {
+            console.log(data["Name"]);
+            hx.notify.info(data["Name"]);
+        }
+        catch (err) {
+            hx.notify.error(err);
         }
     }
 

@@ -6,7 +6,6 @@
         "mock-frontend-server": "http-server dist -p 3030",
         "test": "mocha -r ts-node/register src/**/*.spec.ts",
         "build-hexagon": "gulp build-hexagon",
-        "go": "npm run compile-ts && npm run browserify && npm run mock-frontend-server",
         "default": "gulp default && npm run mock-frontend-server"
     },
     "author": "tgelder@gmail.com",
