@@ -1,4 +1,4 @@
-import * as rm from "../../node_modules/typed-rest-client/RestClient"
+import * as rm from "typed-rest-client/RestClient"
 import { WebFinanceAccount } from '../model/WebFinanceAccount';
 let restc: rm.RestClient = new rm.RestClient('frontend', "http://localhost:8080/accounts/");
 

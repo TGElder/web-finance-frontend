@@ -6,8 +6,9 @@
     "target": "es2015",
     "lib": [ "es2015", "dom" ],
     "typeRoots": [
-        "../node_modules/@types/"
-    ]
+        "node_modules/@types/"
+    ],
+    "moduleResolution": "node"
   },
   "exclude": [
     "node_modules/*"
