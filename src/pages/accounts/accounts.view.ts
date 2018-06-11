@@ -25,6 +25,7 @@ export class AccountsView{
             let accounts: WebFinanceAccount[] = await getAccounts();
     
             let tableRows = [];
+            console.log(accounts);
             for (let account of accounts) {
                 let tableRow = {id: account.getId(), cells: {account: account.getName()}};
                 tableRows.push(tableRow);
