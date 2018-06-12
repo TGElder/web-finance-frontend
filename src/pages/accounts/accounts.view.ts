@@ -1,12 +1,14 @@
-import {getAccounts, addAccount} from "./../../dao/AccountsDAO";
-import {WebFinanceAccount} from "./../../model/WebFinanceAccount";
+import {DAO} from "./../../dao/DAO";
+import {Account} from "./../../model/Account";
 declare const hx: any;
 
 export class AccountsView{
 
     table: any;
+    webFinanceDAO: DAO<Account>;
 
     public async init(): Promise<void> {
+        this.webFinanceDAO = new DAO("http://localhost:8080/accounts", Account.base());
         try {
             this.table = new hx.DataTable('#table');
             new hx.Form('#form')
@@ -22,7 +24,7 @@ export class AccountsView{
     
     private async showAccounts(): Promise<void> {
         try {
-            let accounts: WebFinanceAccount[] = await getAccounts();
+            let accounts: Account[] = await this.webFinanceDAO.getAll();
     
             let tableRows = [];
             console.log(accounts);
@@ -45,9 +47,10 @@ export class AccountsView{
         }
     }
 
-    private async saveAccount(data: JSON): Promise<void> {
+    private async saveAccount(data: object): Promise<void> {
         try {
-            await addAccount(data["Name"]);
+            let account: Account = Account.base().of(data["Name"]);
+            await this.webFinanceDAO.post(account);
             await this.showAccounts();
         }
         catch (err) {
