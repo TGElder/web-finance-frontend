@@ -1,37 +1,73 @@
+import { Account } from "./Account";
 import { Entity } from "./Entity";
 
-export class Account implements Entity<Account> {
+export class Transfer implements Entity<Transfer> {
     private id: number;
-    private name: string;
-    private static INSTANCE: Account = new Account();
+    private from: Account;
+    private to: Account;
+    private what: string;
+    private amount: number;
+    private timestamp: Date;
+
+    private static INSTANCE: Transfer = new Transfer();
 
     getId(): number {
         return this.id;
     }
 
-    getName(): string {
-        return this.name;
+    getFrom(): Account {
+        return this.from;
     }
     
-    static base(): Account {
-        return Account.INSTANCE;
+    getTo(): Account {
+        return this.to;
     }
 
-    of(name: string) {
-        let out: Account = new Account();
+    getWhat(): string {
+        return this.what;
+    }
+
+    getAmount(): number {
+        return this.amount;
+    }
+
+    getTimestamp(): Date {
+        return this.timestamp;
+    }
+
+    static base(): Transfer {
+        return Transfer.INSTANCE;
+    }
+
+    of(from: Account, to: Account, what: string, amount: number, timestamp: Date) {
+        let out: Transfer = new Transfer();
         out.id = null;
-        out.name = name;
+        out.from = from;
+        out.to = to;
+        out.what = what;
+        out.amount = amount;
+        out.timestamp = timestamp;
         return out;
     }
 
-    fromObject(json: object): Account {
-        let out: Account = new Account();
+    fromObject(json: object): Transfer {
+        let out: Transfer = new Transfer();
         out.id = json["id"];
-        out.name = json["name"];
+        out.from = Account.base().fromObject(json["from"]);
+        out.to = Account.base().fromObject(json["to"]);
+        out.what = json["what"];
+        out.amount = json["amount"];
+        out.timestamp = new Date(json["epochSecond"] * 1000);
         return out;
     }
 
     toPostObject(): object {
-        return {"name": this.name};
+        return {
+            "from": {"id": this.from.getId()},
+            "to": {"id": this.to.getId()},
+            "what": this.getWhat(),
+            "amount": this.getAmount(),
+            "epochSecond": this.getTimestamp().getTime() / 1000
+        };
     }
 }
