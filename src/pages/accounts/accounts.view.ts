@@ -8,8 +8,8 @@ export class AccountsView{
     webFinanceDAO: DAO<Account>;
 
     public async init(): Promise<void> {
-        this.webFinanceDAO = new DAO("http://localhost:8080/accounts", Account.base());
         try {
+            this.webFinanceDAO = new DAO("http://localhost:8080/accounts", Account.base());
             this.table = new hx.DataTable('#table');
             new hx.Form('#form')
                 .addText('Name', { required: true })
@@ -18,7 +18,8 @@ export class AccountsView{
             this.showAccounts();
         }
         catch(err) {
-            console.log(err);
+            hx.notify.warning(err.toString());
+            return;
         }
     }
     
@@ -43,7 +44,8 @@ export class AccountsView{
             this.table.feed(hx.dataTable.objectFeed(tableContents));
         }
         catch(err) {
-            console.error(err);
+            hx.notify.warning(err.toString());
+            return;
         }
     }
 
@@ -54,7 +56,8 @@ export class AccountsView{
             await this.showAccounts();
         }
         catch (err) {
-            console.error(err);
+            hx.notify.warning(err.toString());
+            return;
         }
     }
 

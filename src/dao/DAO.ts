@@ -21,7 +21,7 @@ export class DAO<T extends Entity<T>> {
             return out;
         }
         catch(err) {
-            console.error('Failed: ' + err.message);
+            throw new Error("Failed to get all from backend");
         }
     
     }
@@ -33,7 +33,7 @@ export class DAO<T extends Entity<T>> {
             return;
         }
         catch(err) {
-            console.error('Failed: ' + err.message);
+            throw new Error("Failed to post to backend");
         }
     }
 
