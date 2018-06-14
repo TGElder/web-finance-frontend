@@ -38,12 +38,12 @@ gulp.task("default", ["copy-html"], function () {
     return browserify({
         basedir: '.',
         debug: true,
-        entries: ['src/pages/accounts/accounts.controller.ts'],
+        entries: ['src/pages/account/account.controller.ts'],
         cache: {},
         packageCache: {}
     })
     .plugin(tsify)
     .bundle()
-    .pipe(source('accounts.controller.js'))
-    .pipe(gulp.dest("dist/pages/accounts"));
+    .pipe(source('account.controller.js'))
+    .pipe(gulp.dest("dist/pages/account"));
 });

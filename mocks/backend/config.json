@@ -7,6 +7,10 @@
         "accounts": {
             "mockFile": "accounts.json",
             "verbs": ["get", "post"]
+        },
+        "transfers": {
+            "mockFile": "transfers.json",
+            "verbs": ["get", "post"]
         }
     }
 }

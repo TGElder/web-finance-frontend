@@ -1,0 +1,10 @@
+[
+    {
+        "id": 123,
+        "from": { "id": 1, "name": "Personal" },
+        "to": { "id": 2, "name": "Savings" },
+        "what": "Rainy Day",
+        "amount": 4567,
+        "epochSecond": 1000
+    }
+]

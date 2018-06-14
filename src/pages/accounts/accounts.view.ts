@@ -5,11 +5,11 @@ declare const hx: any;
 export class AccountsView{
 
     table: any;
-    webFinanceDAO: DAO<Account>;
+    accountDAO: DAO<Account>;
 
     public async init(): Promise<void> {
         try {
-            this.webFinanceDAO = new DAO("http://localhost:8080/accounts", Account.base());
+            this.accountDAO = new DAO("http://localhost:8080/accounts", Account.base());
             this.table = new hx.DataTable('#table');
             new hx.Form('#form')
                 .addText('Name', { required: true })
@@ -19,13 +19,14 @@ export class AccountsView{
         }
         catch(err) {
             hx.notify.warning(err.toString());
+            console.log(err);
             return;
         }
     }
     
     private async showAccounts(): Promise<void> {
         try {
-            let accounts: Account[] = await this.webFinanceDAO.getAll();
+            let accounts: Account[] = await this.accountDAO.getAll();
     
             let tableRows = [];
             console.log(accounts);
@@ -45,6 +46,7 @@ export class AccountsView{
         }
         catch(err) {
             hx.notify.warning(err.toString());
+            console.log(err);
             return;
         }
     }
@@ -52,11 +54,12 @@ export class AccountsView{
     private async saveAccount(data: object): Promise<void> {
         try {
             let account: Account = Account.base().of(data["Name"]);
-            await this.webFinanceDAO.post(account);
+            await this.accountDAO.post(account);
             await this.showAccounts();
         }
         catch (err) {
             hx.notify.warning(err.toString());
+            console.log(err);
             return;
         }
     }

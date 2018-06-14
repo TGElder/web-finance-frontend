@@ -34,4 +34,8 @@ export class Account implements Entity<Account> {
     toPostObject(): object {
         return {"name": this.name};
     }
+
+    toString(): string {
+        return this.name;
+    }
 }
