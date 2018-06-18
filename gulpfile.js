@@ -1,8 +1,12 @@
 var apiMocker = require("gulp-apimocker");
 var browserify = require("browserify");
+var del = require("del");
+var glob = require("glob");
 var gulp = require("gulp");
+var gulpSequence = require('gulp-sequence')
 var hexagon = require("hexagon-js");
 var source = require('vinyl-source-stream');
+var rename = require('gulp-rename');
 var ts = require("gulp-typescript");
 var tsify = require("tsify");
 
@@ -19,31 +23,49 @@ gulp.task("mock-backend-server", function() {
     })
 });
 
-gulp.task("build-hexagon", function() {
+gulp.task("build-hexagon", ["clean"], function() {
     hexagon.light.build({
     dest: 'dist/resources/hexagon'
     })
 });
 
-var paths = {
-    pages: ['src/**/*.html']
-};
+gulp.task("clean", function() {
+    return del("dist");
+})
 
-gulp.task("copy-html", function () {
-    return gulp.src(paths.pages)
-        .pipe(gulp.dest("dist"));
+gulp.task("copy-html", ["clean"], function () {
+    return glob("src/**/*.html", function(err, files) {
+        if (err) {
+            done(err);
+        }
+        gulp.src(files).pipe(gulp.dest("dist"));
+    });
 });
 
-gulp.task("default", ["copy-html"], function () {
-    return browserify({
-        basedir: '.',
-        debug: true,
-        entries: ['src/pages/account/account.controller.ts'],
-        cache: {},
-        packageCache: {}
-    })
-    .plugin(tsify)
-    .bundle()
-    .pipe(source('account.controller.js'))
-    .pipe(gulp.dest("dist/pages/account"));
+gulp.task("compile", ["clean"], function () {
+    return glob("src/**/*controller.ts", function(err, files) {
+        if (err) {
+            done(err);
+        }
+        files.map(function(file) {
+            browserify({
+                basedir: '.',
+                debug: true,
+                entries: [file],
+                cache: {},
+                packageCache: {}
+            })
+            .plugin(tsify)
+            .bundle()
+            .pipe(source(file))
+            .pipe(rename({
+                dirname: '',
+                extname: '.js'
+            }))
+            .pipe(gulp.dest("dist"));
+            }
+        )
+    });
 });
+
+gulp.task("dist", gulpSequence('clean', ['build-hexagon', 'copy-html', 'compile']));

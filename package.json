@@ -6,15 +6,19 @@
         "mock-frontend-server": "http-server dist -p 3030",
         "test": "mocha -r ts-node/register src/**/*.spec.ts",
         "build-hexagon": "gulp build-hexagon",
-        "default": "gulp default && npm run mock-frontend-server"
+        "dist": "gulp dist && npm run mock-frontend-server"
     },
     "author": "tgelder@gmail.com",
     "devDependencies": {
         "browserify": "16.2.2",
         "chai": "4.1.2",
+        "del": "3.0.0",
         "hexagon-js": "1.15.0",
+        "glob": "7.1.2",
         "gulp": "3.9.1",
         "gulp-apimocker": "0.1.0",
+        "gulp-rename": "1.3.0",
+        "gulp-sequence": "1.0.0",
         "gulp-typescript": "4.0.2",
         "http-server": "0.11.1",
         "mocha": "5.2.0",
