@@ -8,9 +8,11 @@ export class AccountsView{
 
     private accountTable: AccountTable;
 
-    constructor(accountDAO: DAO<Account>) {
+    init(accountDAO: DAO<Account>) {
         this.accountTable = new AccountTable(accountDAO);
-        new AccountForm(accountDAO, this.refresh.bind(this));
+        let accountForm: AccountForm = new AccountForm(accountDAO, this.refresh.bind(this));
+        this.accountTable.init();
+        accountForm.init();
     }
 
     public async refresh(): Promise<void> {

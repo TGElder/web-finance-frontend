@@ -9,9 +9,11 @@ export class AccountView{
 
     private transferTable: TransferTable;
 
-    constructor(accountsDAO: DAO<Account>, transferDAO: DAO<Transfer>, ) {
+    async init(accountsDAO: DAO<Account>, transferDAO: DAO<Transfer>) {
         this.transferTable = new TransferTable(transferDAO);
-        new TransferForm(accountsDAO, transferDAO, this.refresh.bind(this));
+        this.transferTable.init();
+        let transferForm = new TransferForm(await accountsDAO.getAll(), transferDAO, this.refresh.bind(this));
+        transferForm.init();
     }
 
     public async refresh(): Promise<void> {

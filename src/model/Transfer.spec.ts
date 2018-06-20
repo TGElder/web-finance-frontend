@@ -19,6 +19,7 @@ it('should be able to create a transfer from JSON', (done) => {
     expect(transfer.getTo().getId()).to.equal(2);
     expect(transfer.getTo().getName()).to.equal("Savings");
     expect(transfer.getWhat()).to.equal("Rainy Day");
+    expect(transfer.getAmount()).to.equal(4567);
     expect(transfer.getTimestamp().getTime()).to.equal(1000000);
     done();
 });
@@ -37,6 +38,7 @@ it('should be able to create an transfer from parameters', (done) => {
     expect(transfer.getTo().getId()).to.equal(2);
     expect(transfer.getTo().getName()).to.equal("Savings");
     expect(transfer.getWhat()).to.equal("Rainy Day");
+    expect(transfer.getAmount()).to.equal(4567);
     expect(transfer.getTimestamp().getTime()).to.equal(1000000);
     done();
 });

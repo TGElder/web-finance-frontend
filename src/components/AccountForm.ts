@@ -1,37 +1,23 @@
 import {DAO} from "../dao/DAO";
 import {Account} from "./../model/Account";
-declare const hx: any;
+import {Form} from "./Form";
+declare const hx;
 
-export class AccountForm{
-
-    private table: any;
-    private accountDAO: DAO<Account>;
-    private refresh: () => void;
+export class AccountForm extends Form<Account> {
 
     constructor(accountDAO: DAO<Account>, refresh: () => void) {
-        this.accountDAO = accountDAO;
-        this.refresh = refresh;
-        this.init();
+        super(accountDAO, refresh);
     }
 
-    private init(): void {
+    public init(): void {
         new hx.Form('#account_form')
             .addText('Name', { required: true })
             .addSubmit('Submit', 'fa fa-check')
-            .on('submit', (data) => {this.saveAccount(data)})
+            .on('submit', (data) => {this.save(data)})
     }
     
-    private async saveAccount(data: object): Promise<void> {
-        try {
-            let account: Account = Account.base().of(data["Name"]);
-            await this.accountDAO.post(account);
-            await this.refresh();
-        }
-        catch (err) {
-            hx.notify.warning(err.toString());
-            console.log(err);
-            return;
-        }
+    createFromFormData(formData: object): Account {
+        return Account.base().of(formData["Name"]);
     }
 
 }
