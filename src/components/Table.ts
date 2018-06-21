@@ -7,10 +7,12 @@ export abstract class Table<T extends Entity<T>> {
     private element: string;
     private table: any;
     private tableDAO: DAO<T>;
+    private parameters: object;
 
-    constructor(element: string, tableDAO: DAO<T>) {
+    constructor(element: string, tableDAO: DAO<T>, parameters: object) {
         this.element = element;
         this.tableDAO = tableDAO;
+        this.parameters = parameters;
     }
     
     public async init(): Promise<void> {
@@ -27,7 +29,7 @@ export abstract class Table<T extends Entity<T>> {
     
     public async refresh(): Promise<void> {
         try {
-            let entities: T[] = await this.tableDAO.getAll();
+            let entities: T[] = await this.tableDAO.getAll(this.parameters);
     
             let tableRows = [];
             for (let entity of entities) {

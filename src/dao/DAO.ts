@@ -3,17 +3,22 @@ import { Entity } from "../model/Entity"
 
 export class DAO<T extends Entity<T>> {
 
+    private service: string;
     private client: rm.RestClient;
     private base: T;
 
-    constructor(url: string, base: T) {
-        this.client = new rm.RestClient('frontend', url);
+    constructor(service: string, base: T) {
+        this.service = service;
+        this.client = new rm.RestClient('frontend', "");
         this.base = base;
     }
 
-    async getAll(): Promise<T[]> {
+    async getAll(parameters: object): Promise<T[]> {
         try {
-            let restRes: rm.IRestResponse<object[]> = await this.client.get<object[]>('');
+            let url: string = this.service + this.parametersToString(parameters);
+            console.log(url);
+            let restRes: rm.IRestResponse<object[]> = await this.client.get<object[]>(url);
+        
             let out: T[] = [];
             for (let entity of restRes.result) {
                 out.push(this.base.fromObject(entity))
@@ -27,10 +32,16 @@ export class DAO<T extends Entity<T>> {
     
     }
 
+    private parametersToString(parameters: object): string {
+        return '?' + Object.keys(parameters).map(function(key) {
+            return key + '=' + parameters[key];
+        }).join('&');
+    }
+
     async post(t: T): Promise<void> {
         try {
             let data: object = t.toPostObject();
-            let hres: rm.IRestResponse<object> = await this.client.create<object>('', data);
+            let hres: rm.IRestResponse<object> = await this.client.create<object>(this.service, data);
             return;
         }
         catch(err) {

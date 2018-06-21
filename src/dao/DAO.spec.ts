@@ -7,7 +7,7 @@ it('should get the list of accounts', (done) => {
 
     let dao: DAO<Account> = new DAO("http://localhost:8080/accounts", Account.base());
 
-    dao.getAll().then( (accounts) => {
+    dao.getAll({}).then( (accounts) => {
         expect(accounts).to.deep.equal([
             {
                 "id": 1,

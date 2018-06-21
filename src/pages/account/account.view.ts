@@ -12,7 +12,7 @@ export class AccountView{
     async init(accountsDAO: DAO<Account>, transferDAO: DAO<Transfer>) {
         this.transferTable = new TransferTable(transferDAO);
         this.transferTable.init();
-        let transferForm = new TransferForm(await accountsDAO.getAll(), transferDAO, this.refresh.bind(this));
+        let transferForm = new TransferForm(await accountsDAO.getAll({}), transferDAO, this.refresh.bind(this));
         transferForm.init();
     }
 

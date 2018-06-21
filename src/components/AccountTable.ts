@@ -6,7 +6,7 @@ declare const hx: any;
 export class AccountTable extends Table<Account> {
 
     constructor(accountDAO: DAO<Account>) {
-        super("#account_table", accountDAO);
+        super("#account_table", accountDAO, {});
     }
 
     getHeaders(): object[] {
