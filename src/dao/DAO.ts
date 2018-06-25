@@ -16,7 +16,6 @@ export class DAO<T extends Entity<T>> {
     async getAll(parameters: object): Promise<T[]> {
         try {
             let url: string = this.service + this.parametersToString(parameters);
-            console.log(url);
             let restRes: rm.IRestResponse<object[]> = await this.client.get<object[]>(url);
         
             let out: T[] = [];

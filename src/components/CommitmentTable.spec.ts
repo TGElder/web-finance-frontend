@@ -1,21 +1,25 @@
 import { expect } from 'chai';
 import 'mocha';
-import { Transfer } from './../model/Transfer'
-import { TransferTable } from './TransferTable'
+import { Commitment } from './../model/Commitment'
+import { CommitmentTable } from './CommitmentTable'
 
 it('should be able to create a row from a commitment', (done) => {
-    let transfer: Transfer = Transfer.base().fromObject({
+    let commitment: Commitment = Commitment.base().fromObject({
         "id": 123,
         "from": { "id": 1, "name": "Personal" },
         "to": { "id": 2, "name": "Savings" },
         "what": "Rainy Day",
         "amount": 4567,
-        "epochSecond": 1000
+        "epochSecond": 1000,
+        "closure": {
+            "id": 456,
+            "epochSecond": 1001
+        }
     });
 
-    let transferTable: TransferTable = new TransferTable(null);
+    let commitmentTable: CommitmentTable = new CommitmentTable(null);
 
-    let row: object = transferTable.createRowFromObject(transfer);
+    let row: object = commitmentTable.createRowFromObject(commitment);
 
     expect(row).to.deep.equals({
         "id": 123,
@@ -24,7 +28,8 @@ it('should be able to create a row from a commitment', (done) => {
             "to": "Savings",
             "what": "Rainy Day",
             "amount": 4567,
-            "timestamp": new Date(1000000)
+            "timestamp": new Date(1000000),
+            "closed": new Date(1001000)
         }
     });
     

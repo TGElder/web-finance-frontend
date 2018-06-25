@@ -11,6 +11,10 @@
         "transfers": {
             "mockFile": "transfers.json",
             "verbs": ["get", "post"]
+        },
+        "commitments": {
+            "mockFile": "commitments.json",
+            "verbs": ["get", "post"]
         }
     }
 }

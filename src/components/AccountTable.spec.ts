@@ -3,7 +3,7 @@ import 'mocha';
 import { Account } from './../model/Account'
 import { AccountTable } from './AccountTable'
 
-it('should be able to create a row from object', (done) => {
+it('should be able to create a row from an account', (done) => {
     let account: Account = Account.base().fromObject({
         "id": 1,
         "name": "Personal"
