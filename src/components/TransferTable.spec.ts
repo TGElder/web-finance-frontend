@@ -13,7 +13,7 @@ it('should be able to create a row from a commitment', (done) => {
         "epochSecond": 1000
     });
 
-    let transferTable: TransferTable = new TransferTable(null);
+    let transferTable: TransferTable = new TransferTable(null, {});
 
     let row: object = transferTable.createRowFromObject(transfer);
 

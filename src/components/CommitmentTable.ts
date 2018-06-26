@@ -5,8 +5,8 @@ declare const hx: any;
 
 export class CommitmentTable extends Table<Commitment> {
 
-    constructor(commitmentDAO: DAO<Commitment>) {
-        super("#commitment_table", commitmentDAO, {"account": 1});
+    constructor(commitmentDAO: DAO<Commitment>,  parameters: object) {
+        super("#commitment_table", commitmentDAO, parameters);
     }
 
     getHeaders(): object[] {

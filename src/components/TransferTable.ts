@@ -5,8 +5,8 @@ declare const hx: any;
 
 export class TransferTable extends Table<Transfer> {
 
-    constructor(transferDAO: DAO<Transfer>) {
-        super("#transfer_table", transferDAO, {"account": 1});
+    constructor(transferDAO: DAO<Transfer>, parameters: object) {
+        super("#transfer_table", transferDAO, parameters);
     }
 
     getHeaders(): object[] {
