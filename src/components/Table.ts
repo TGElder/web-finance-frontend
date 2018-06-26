@@ -17,7 +17,7 @@ export abstract class Table<T extends Entity<T>> {
     
     public async init(): Promise<void> {
         try {
-            this.table = new hx.DataTable(this.element).on('select', data => console.log(data));
+            this.table = new hx.DataTable(this.element).on('rowclick', data => console.log(data));
             this.refresh();
         }
         catch(err) {
