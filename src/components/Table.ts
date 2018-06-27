@@ -17,7 +17,7 @@ export abstract class Table<T extends Entity<T>> {
     
     public async init(): Promise<void> {
         try {
-            this.table = new hx.DataTable(this.element).on('rowclick', data => console.log(data));
+            this.table = new hx.DataTable(this.element, this.getOptions());
             this.refresh();
         }
         catch(err) {
@@ -50,6 +50,8 @@ export abstract class Table<T extends Entity<T>> {
             return;
         }
     }
+
+    abstract getOptions(): object;
 
     abstract getHeaders(): object[];
 

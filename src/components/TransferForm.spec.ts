@@ -15,8 +15,8 @@ it('should be able to create a transfer from form data', (done) => {
         "From": "1: Personal",
         "To": "2: Savings",
         "What": "Rainy Day",
-        "Pounds": "45",
-        "Pence": "67",
+        "Pounds": "1",
+        "Pence": "1",
         "When": new Date(1000000)
     };
 
@@ -28,7 +28,7 @@ it('should be able to create a transfer from form data', (done) => {
     expect(transfer.getTo().getId()).to.equal(2);
     expect(transfer.getTo().getName()).to.equal("Savings");
     expect(transfer.getWhat()).to.equal("Rainy Day");
-    expect(transfer.getAmount()).to.equal(4567);
+    expect(transfer.getAmount()).to.equal(101);
     expect(transfer.getTimestamp().getTime()).to.equal(1000000);
     done();
 });

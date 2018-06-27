@@ -9,6 +9,10 @@ export class TransferTable extends Table<Transfer> {
         super("#transfer_table", transferDAO, parameters);
     }
 
+    getOptions(): object {
+        return {};
+    }
+
     getHeaders(): object[] {
         return [
             {name: 'From', id: 'from'},

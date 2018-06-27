@@ -17,7 +17,7 @@ it('should be able to create a row from a commitment', (done) => {
         }
     });
 
-    let commitmentTable: CommitmentTable = new CommitmentTable(null, {});
+    let commitmentTable: CommitmentTable = new CommitmentTable(null, null, {});
 
     let row: object = commitmentTable.createRowFromObject(commitment);
 

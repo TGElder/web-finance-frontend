@@ -15,8 +15,8 @@ it('should be able to create a commitment from form data', (done) => {
         "From": "1: Personal",
         "To": "2: Savings",
         "What": "Rainy Day",
-        "Pounds": "45",
-        "Pence": "67",
+        "Pounds": "1",
+        "Pence": "1",
         "When": new Date(1000000)
     };
 
@@ -28,7 +28,7 @@ it('should be able to create a commitment from form data', (done) => {
     expect(commitment.getTo().getId()).to.equal(2);
     expect(commitment.getTo().getName()).to.equal("Savings");
     expect(commitment.getWhat()).to.equal("Rainy Day");
-    expect(commitment.getAmount()).to.equal(4567);
+    expect(commitment.getAmount()).to.equal(101);
     expect(commitment.getTimestamp().getTime()).to.equal(1000000);
     expect(commitment.getClosed()).to.equal(null);
     done();
