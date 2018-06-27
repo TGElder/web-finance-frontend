@@ -23,13 +23,14 @@ it('should be able to create a row from a commitment', (done) => {
 
     expect(row).to.deep.equals({
         "id": 123,
+        "commitment": commitment,
         "cells": {
             "from": "Personal",
             "to": "Savings",
             "what": "Rainy Day",
-            "amount": 4567,
-            "timestamp": new Date(1000000),
-            "closed": new Date(1001000)
+            "amount": 45.67,
+            "timestamp": new Date(1000000).toLocaleString(),
+            "closed": new Date(1001000).toLocaleString()
         }
     });
     

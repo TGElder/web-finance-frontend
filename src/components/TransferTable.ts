@@ -29,8 +29,8 @@ export class TransferTable extends Table<Transfer> {
             from: transfer.getFrom().getName(),
             to: transfer.getTo().getName(),
             what: transfer.getWhat(),
-            amount: transfer.getAmount(),
-            timestamp: transfer.getTimestamp()
+            amount: transfer.getAmount() / 100,
+            timestamp: transfer.getTimestamp().toLocaleString()
         }};
     }
 

@@ -64,9 +64,9 @@ export class CommitmentTable extends Table<Commitment> {
             from: commitment.getFrom().getName(),
             to: commitment.getTo().getName(),
             what: commitment.getWhat(),
-            amount: commitment.getAmount(),
-            timestamp: commitment.getTimestamp(),
-            closed: commitment.getClosed()
+            amount: commitment.getAmount() / 100,
+            timestamp: commitment.getTimestamp().toLocaleString(),
+            closed: commitment.getClosed().toLocaleString()
         }};
     }
 

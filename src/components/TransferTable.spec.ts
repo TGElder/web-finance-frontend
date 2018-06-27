@@ -23,8 +23,8 @@ it('should be able to create a row from a commitment', (done) => {
             "from": "Personal",
             "to": "Savings",
             "what": "Rainy Day",
-            "amount": 4567,
-            "timestamp": new Date(1000000)
+            "amount": 45.67,
+            "timestamp": new Date(1000000).toLocaleString()
         }
     });
     
