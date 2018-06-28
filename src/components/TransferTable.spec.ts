@@ -3,7 +3,7 @@ import 'mocha';
 import { Transfer } from './../model/Transfer'
 import { TransferTable } from './TransferTable'
 
-it('should be able to create a row from a commitment', (done) => {
+it('should be able to create a row from a transfer', (done) => {
     let transfer: Transfer = Transfer.base().fromObject({
         "id": 123,
         "from": { "id": 1, "name": "Personal" },

@@ -20,3 +20,16 @@ it('should get the list of accounts', (done) => {
         ]);
     }).then(done).catch(err => done(err));
 });
+
+it('should get an account', (done) => {
+
+    let dao: DAO<Account> = new DAO("http://localhost:8080/accounts", Account.base());
+
+    dao.get(1).then( (account) => {
+        expect(account).to.deep.equal(
+            {
+                "id": 1,
+                "name": "Savings"
+            });
+    }).then(done).catch(err => done(err));
+});

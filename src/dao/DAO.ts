@@ -28,7 +28,18 @@ export class DAO<T extends Entity<T>> {
             console.log(err);
             throw new Error("Failed to get all from backend");
         }
-    
+    }
+
+    async get(id: number): Promise<T> {
+        try {
+            let url: string = this.service + "/" + id;
+            let restRes: rm.IRestResponse<object[]> = await this.client.get<object[]>(url);
+            return this.base.fromObject(restRes.result);
+        }
+        catch(err) {
+            console.log(err);
+            throw new Error("Failed to get from backend");
+        }
     }
 
     private parametersToString(parameters: object): string {
