@@ -72,18 +72,13 @@ it('should be able to create an commitment from parameters', (done) => {
 });
 
 it('should be able to create post object from account', (done) => {
-    let commitment: Commitment = Commitment.base().fromObject({
-        "id": 123,
-        "from": { "id": 1, "name": "Personal" },
-        "to": { "id": 2, "name": "Savings" },
-        "what": "Rainy Day",
-        "amount": 4567,
-        "epochSecond": 1000,
-        "closure": {
-            "id": 456,
-            "epochSecond": 1001
-        }
-    });
+    let commitment: Commitment = Commitment.base().of(
+        Account.base().fromObject({"id": 1, "name": "Personal"}),
+        Account.base().fromObject({"id": 2, "name": "Savings"}),
+        "Rainy Day",
+        4567,
+        new Date(1000000)
+    )
 
     let post: object = commitment.toPostObject();
     expect(post).to.deep.equal({

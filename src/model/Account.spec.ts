@@ -17,8 +17,7 @@ it('should be able to create an account from parameters', (done) => {
 });
 
 it('should be able to create post object from account', (done) => {
-    let data: object = {"id": 123, "name": "Personal"};
-    let post: object = Account.base().fromObject(data).toPostObject();
+    let post: object = Account.base().of("Personal").toPostObject();
     expect(post).to.deep.equal({"name": "Personal"});
     done();
 });

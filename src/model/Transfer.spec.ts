@@ -44,14 +44,13 @@ it('should be able to create an transfer from parameters', (done) => {
 });
 
 it('should be able to create post object from account', (done) => {
-    let transfer: Transfer = Transfer.base().fromObject({
-        "id": 123,
-        "from": { "id": 1, "name": "Personal" },
-        "to": { "id": 2, "name": "Savings" },
-        "what": "Rainy Day",
-        "amount": 4567,
-        "epochSecond": 1000
-    });
+    let transfer: Transfer = Transfer.base().of(
+        Account.base().fromObject({"id": 1, "name": "Personal"}),
+        Account.base().fromObject({"id": 2, "name": "Savings"}),
+        "Rainy Day",
+        4567,
+        new Date(1000000)
+    )
 
     let post: object = transfer.toPostObject();
     expect(post).to.deep.equal({
