@@ -13,6 +13,7 @@ export class AccountsView{
         let accountForm: AccountForm = new AccountForm(accountDAO, this.refresh.bind(this));
         this.accountTable.init();
         accountForm.init();
+        new hx.Collapsible('#account_collapsible')
     }
 
     public async refresh(): Promise<void> {
