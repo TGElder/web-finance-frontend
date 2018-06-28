@@ -10,22 +10,34 @@
   <link rel="stylesheet" href="/resources/hexagon/hexagon.css">
 </head>
 <html>
-    <head><title>Account</title></head>
     
     <body>
         <div class="hx-content">
-            <h1>Readings</h1>
-            <div id="reading_table"></div>
-            <div id="reading_form_header"><h2>Create New</h2></div>
-            <div id="reading_form"></div>
-            <h1>Transfers</h1>
+            <h1><div id="account_header"></div></h1>
+            <h2>Readings</h2>
+            <div id="reading_table"></div>            
+            <div id="reading_collapsible">
+                <div class="hx-collapsible-heading">Add New</div>
+                <div class="hx-collapsible-content">
+                    <div id="reading_form"></div>
+                </div>
+            </div>
+            <h2>Transfers</h2>
             <div id="transfer_table"></div>
-            <div id="transfer_form_header"><h2>Create New</h2></div>
-            <div id="transfer_form"></div>
-            <h1>Commitments</h1>
+            <div id="transfer_collapsible">
+                <div class="hx-collapsible-heading">Add New</div>
+                <div class="hx-collapsible-content">
+                    <div id="transfer_form"></div>
+                </div>
+            </div>
+            <h2>Commitments</h2>
             <div id="commitment_table"></div>
-            <div id="commitment_form_header"><h2>Create New</h2></div>
-            <div id="commitment_form"></div>
+            <div id="commitment_collapsible">
+                <div class="hx-collapsible-heading">Add New</div>
+                <div class="hx-collapsible-content">
+                    <div id="commitment_form"></div>
+                </div>
+            </div>
         </div>
         <script src="/resources/hexagon/hexagon.js"></script>
         <script src="account.controller.js"></script>

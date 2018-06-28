@@ -17,6 +17,9 @@ export class AccountView{
     private readingTable: ReadingTable;
     private transferTable: TransferTable;
     private commitmentTable: CommitmentTable;
+    private readingForm: ReadingForm;
+    private transferForm: TransferForm;
+    private commitmentForm: CommitmentForm;
 
     async init(
         accountsDAO: DAO<Account>,
@@ -43,19 +46,27 @@ export class AccountView{
             let accounts: Account[] = await accountsDAO.getAll({});
             let account: Account = await accountsDAO.get(accountId);
 
-            this.readingTable = new ReadingTable(readingDAO, {});
-            let readingForm = new ReadingForm(account, readingDAO, this.refresh.bind(this));
-            this.transferTable = new TransferTable(transferDAO, transferParams);
-            let transferForm = new TransferForm(accounts, transferDAO, this.refresh.bind(this));
-            this.commitmentTable = new CommitmentTable(commitmentDAO, commitmentClosureDAO, commitmentParams);
-            let commitmentForm = new CommitmentForm(accounts, commitmentDAO, this.refresh.bind(this));
+            document.title = account.getName();
 
-            readingForm.init();
-            transferForm.init();
-            commitmentForm.init();
+            this.readingTable = new ReadingTable(readingDAO, {});
+            this.readingForm = new ReadingForm(account, readingDAO, this.refresh.bind(this));
+            this.transferTable = new TransferTable(transferDAO, transferParams);
+            this.transferForm = new TransferForm(accounts, transferDAO, this.refresh.bind(this));
+            this.commitmentTable = new CommitmentTable(commitmentDAO, commitmentClosureDAO, commitmentParams);
+            this.commitmentForm = new CommitmentForm(accounts, commitmentDAO, this.refresh.bind(this));
+
+            hx.select("#account_header").text(account.getName());
+
+            this.readingForm.init();
+            this.transferForm.init();
+            this.commitmentForm.init();
             this.readingTable.init();
             this.transferTable.init();
             this.commitmentTable.init();
+
+            new hx.Collapsible('#reading_collapsible')
+            new hx.Collapsible('#transfer_collapsible')
+            new hx.Collapsible('#commitment_collapsible')
         }
 
        
