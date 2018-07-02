@@ -17,7 +17,7 @@ export class AccountForm extends Form<Account> {
     }
     
     createFromFormData(formData: object): Account {
-        return Account.base().of(formData["Name"]);
+        return Account.base().of(formData["Name"], null);
     }
 
 }

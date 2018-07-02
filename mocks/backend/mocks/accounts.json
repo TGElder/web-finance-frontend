@@ -1,10 +1,24 @@
 [
     {
         "id": 1,
-        "name": "Savings"
+        "name": "Savings",
+        "balance": {
+            "lastReading": 1000,
+            "transfersIn": 200,
+            "transfersOut": 300,
+            "commitmentsIn": 400,
+            "commitmentsOut": 500
+        }
     },
     {
         "id": 2,
-        "name": "Personal"
+        "name": "Personal",
+        "balance": {
+            "lastReading": 1000,
+            "transfersIn": 300,
+            "transfersOut": 200,
+            "commitmentsIn": 500,
+            "commitmentsOut": 400
+        }
     }
 ]

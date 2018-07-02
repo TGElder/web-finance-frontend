@@ -22,7 +22,11 @@ export class AccountTable extends Table<Account> {
 
     getHeaders(): object[] {
         return [
-            {name: 'Account', id: 'account'}
+            {name: 'Account', id: 'account'},
+            {name: 'Last Reading', id: 'lastReading'},
+            {name: 'Transfers', id: 'transfers'},
+            {name: 'Commitments', id: 'commitments'},
+            {name: 'Balance', id: 'balance'},
         ];
     }
 
@@ -30,7 +34,11 @@ export class AccountTable extends Table<Account> {
         return {
             id: account.getId(), 
             cells: {
-                account: account.getName()
+                account: account.getName(),
+                lastReading: account.getBalance().getLastReading() / 100,
+                transfers: account.getBalance().getTransferTotal() / 100,
+                commitments: account.getBalance().getCommitmentsTotal() / 100,
+                balance: account.getBalance().getTotal() / 100
             }
         };
     }
