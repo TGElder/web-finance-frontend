@@ -13,8 +13,13 @@
     
     <body>
         <div class="hx-content">
-            <h1><div id="account_header"></div></h1>
-            <h2>Readings</h2>
+            <div class="hx-group hx-horizontal">
+                <div class="hx-section"><h1><div id="account_header"></div></h1></div>
+                <div class="hx-section" style="text-align:right"><h3><div id="balance_total"></div></h3></div>
+            </div>
+            <div class="hx-group hx-horizontal">
+                <div class="hx-section"><h2>Readings</h2></div>
+            </div>
             <div id="reading_table"></div>            
             <div id="reading_collapsible">
                 <div class="hx-collapsible-heading">Add New</div>
@@ -22,7 +27,11 @@
                     <div id="reading_form"></div>
                 </div>
             </div>
-            <h2>Transfers</h2>
+            <div class="hx-group hx-horizontal">
+                <div class="hx-section"><h2>Transfers</h2></div>
+                <div class="hx-section" style="text-align:right"><h3><div id="transfer_total"></div></h3></div>
+            </div>
+            <h3><div id="transfer_total"></div></h3>
             <div id="transfer_table"></div>
             <div id="transfer_collapsible">
                 <div class="hx-collapsible-heading">Add New</div>
@@ -30,7 +39,10 @@
                     <div id="transfer_form"></div>
                 </div>
             </div>
-            <h2>Commitments</h2>
+            <div class="hx-group hx-horizontal">
+                <div class="hx-section"><h2>Commitments</h2></div>
+                <div class="hx-section" style="text-align:right"><h3><div id="commitment_total"></div></h3></div>
+            </div>
             <div id="commitment_table"></div>
             <div id="commitment_collapsible">
                 <div class="hx-collapsible-heading">Add New</div>

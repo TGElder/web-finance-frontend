@@ -7,14 +7,17 @@ declare const hx: any;
 export class CommitmentTable extends Table<Commitment> {
 
     private commitmentClosureDAO: DAO<CommitmentClosure>;
+    private onCommitmentClose: () => void;
 
     constructor(
         commitmentDAO: DAO<Commitment>,  
         commitmentClosureDAO: DAO<CommitmentClosure>, 
-        parameters: object
+        parameters: object,
+        onCommitmentClose: () => void
     ) {
         super("#commitment_table", commitmentDAO, parameters);
         this.commitmentClosureDAO = commitmentClosureDAO;
+        this.onCommitmentClose = onCommitmentClose;
     }
 
     getOptions(): object {
@@ -22,7 +25,7 @@ export class CommitmentTable extends Table<Commitment> {
              closed: {
                 cellRenderer: (element, cell, row) => {
                     if (cell) {
-                        hx.select(element).text(cell);
+                        hx.select(element).text(cell.toLocaleString());
                     } else {
                         hx.select(element).add(hx
                             .button({context: 'positive'})
@@ -42,7 +45,7 @@ export class CommitmentTable extends Table<Commitment> {
                 new Date()
             )
         );
-        this.refresh();
+        this.onCommitmentClose();
     }
 
     getHeaders(): object[] {
@@ -66,7 +69,7 @@ export class CommitmentTable extends Table<Commitment> {
             what: commitment.getWhat(),
             amount: commitment.getAmount() / 100,
             timestamp: commitment.getTimestamp().toLocaleString(),
-            closed: commitment.getClosed().toLocaleString()
+            closed: commitment.getClosed()
         }};
     }
 

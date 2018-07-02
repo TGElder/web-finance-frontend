@@ -17,7 +17,7 @@ it('should be able to create a row from a commitment', (done) => {
         }
     });
 
-    let commitmentTable: CommitmentTable = new CommitmentTable(null, null, {});
+    let commitmentTable: CommitmentTable = new CommitmentTable(null, null, {}, null);
 
     let row: object = commitmentTable.createRowFromObject(commitment);
 
@@ -30,7 +30,7 @@ it('should be able to create a row from a commitment', (done) => {
             "what": "Rainy Day",
             "amount": 45.67,
             "timestamp": new Date(1000000).toLocaleString(),
-            "closed": new Date(1001000).toLocaleString()
+            "closed": new Date(1001000)
         }
     });
     

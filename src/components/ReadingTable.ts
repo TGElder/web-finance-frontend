@@ -10,7 +10,10 @@ export class ReadingTable extends Table<Reading> {
     }
 
     getOptions(): object {
-        return {};
+        return {
+            pageSize: 1,
+            filterEnabled: false
+        };
     }
 
     getHeaders(): object[] {
